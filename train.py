@@ -24,7 +24,7 @@ def reset_seeds():
     Returns:
         None
     """
-    os.environ['PYTHONHASHSEED'] = str(42)
+    os.environ["PYTHONHASHSEED"] = str(42)
     tf.random.set_seed(42)
     np.random.seed(42)
     random.seed(42)
@@ -39,7 +39,8 @@ def read_data():
         y (pandas.Series): The target vector of shape (n_samples,).
     """
     data = pd.read_csv(
-        'https://raw.githubusercontent.com/renansantosmendes/lectures-cdas-2023/master/fetal_health_reduced.csv')
+        "https://raw.githubusercontent.com/heltonricardo/fetal-health-classifier/main/fetal_health_reduced.csv"
+    )
     X = data.drop(["fetal_health"], axis=1)
     y = data["fetal_health"]
     return X, y
@@ -65,10 +66,9 @@ def process_data(X, y):
     X_df = scaler.fit_transform(X)
     X_df = pd.DataFrame(X_df, columns=columns_names)
 
-    X_train, X_test, y_train, y_test = train_test_split(X_df,
-                                                        y,
-                                                        test_size=0.3,
-                                                        random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_df, y, test_size=0.3, random_state=42
+    )
 
     y_train = y_train - 1
     y_test = y_test - 1
@@ -81,7 +81,7 @@ def create_model(X):
 
     Parameters:
         X (numpy.ndarray): The input data array. It should have a shape of (num_samples,
-         num_features).
+        num_features).
 
     Returns:
         tensorflow.keras.models.Sequential: The created neural network model.
@@ -89,13 +89,13 @@ def create_model(X):
     reset_seeds()
     model = Sequential()
     model.add(InputLayer(input_shape=(X.shape[1],)))
-    model.add(Dense(10, activation='relu'))
-    model.add(Dense(10, activation='relu'))
-    model.add(Dense(3, activation='softmax'))
+    model.add(Dense(10, activation="relu"))
+    model.add(Dense(10, activation="relu"))
+    model.add(Dense(3, activation="softmax"))
 
-    model.compile(loss='sparse_categorical_crossentropy',
-                  optimizer='adam',
-                  metrics=['accuracy'])
+    model.compile(
+        loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+    )
     return model
 
 
@@ -104,7 +104,7 @@ def config_mlflow():
     Configures the MLflow settings for tracking experiments.
 
     Sets the MLFLOW_TRACKING_USERNAME and MLFLOW_TRACKING_PASSWORD environment
-     variables to provide authentication for accessing the MLflow tracking server.
+    variables to provide authentication for accessing the MLflow tracking server.
 
     Sets the MLflow tracking URI to 'https://dagshub.com/renansantosmendes/mlops-ead.mlflow'
     to specify the location where the experiment data will be logged.
@@ -119,13 +119,13 @@ def config_mlflow():
     Returns:
         None
     """
-    os.environ['MLFLOW_TRACKING_USERNAME'] = 'renansantosmendes'
-    os.environ['MLFLOW_TRACKING_PASSWORD'] = '6d730ef4a90b1caf28fbb01e5748f0874fda6077'
-    mlflow.set_tracking_uri('https://dagshub.com/renansantosmendes/mlops-ead.mlflow')
+    os.environ["MLFLOW_TRACKING_USERNAME"] = "renansantosmendes"
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = "6d730ef4a90b1caf28fbb01e5748f0874fda6077"
+    mlflow.set_tracking_uri("https://dagshub.com/renansantosmendes/mlops-ead.mlflow")
 
-    mlflow.tensorflow.autolog(log_models=True,
-                              log_input_examples=True,
-                              log_model_signatures=True)
+    mlflow.tensorflow.autolog(
+        log_models=True, log_input_examples=True, log_model_signatures=True
+    )
 
 
 def train_model(model, X_train, y_train, is_train=True):
@@ -143,15 +143,11 @@ def train_model(model, X_train, y_train, is_train=True):
     Returns:
     None
     """
-    with mlflow.start_run(run_name='experiment_mlops_ead') as run:
-        model.fit(X_train,
-                  y_train,
-                  epochs=50,
-                  validation_split=0.2,
-                  verbose=3)
+    with mlflow.start_run(run_name="experiment_mlops_ead") as run:
+        model.fit(X_train, y_train, epochs=50, validation_split=0.2, verbose=3)
     if is_train:
-        run_uri = f'runs:/{run.info.run_id}'
-        mlflow.register_model(run_uri, 'fetal_health')
+        run_uri = f"runs:/{run.info.run_id}"
+        mlflow.register_model(run_uri, "fetal_health")
 
 
 if __name__ == "__main__":
