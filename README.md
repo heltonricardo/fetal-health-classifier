@@ -1,6 +1,6 @@
 # Fetal Health Classifier 👶🏻
 
-Repositório para o projeto de `detecção de sofrimento fetal` utilizando técnicas de **Inteligência Artificial e Machine Learning**. O foco principal está na análise de dados provenientes de cardiotocografias para prever possíveis situações de risco durante o trabalho de parto.
+Repositório para o projeto de `detecção de sofrimento fetal` utilizando técnicas de **Inteligência Artificial e Machine Learning** com o auxílio de **Keras e TensorFlow**. O foco principal está na análise de dados provenientes de cardiotocografias para prever possíveis situações de risco durante o trabalho de parto.
 
 ## 🌐 Contextualização
 
@@ -20,4 +20,4 @@ No contexto do problema, cada leitura da cardiotocografia é classificada em uma
 
 ## 🛠️ Abordagem na resolução do problema
 
-Ao lidar com os dados, o especialista médico desempenha um papel crucial, identificando as características relevantes no exame. A tarefa, neste exercício, é utilizar um conjunto de dados já processado para criar um `modelo preditivo`. Esse modelo deverá vincular as características extraídas do exame com as categorias de classificação, permitindo a previsão do estado do bebê com base nas variáveis monitoradas.
+Ao lidar com os dados, o especialista médico desempenha um papel crucial, identificando as características relevantes no exame. A tarefa, neste exercício, é utilizar um conjunto de dados já processado para criar um `modelo preditivo`. Esse modelo deverá vincular as características extraídas do exame com as categorias de classificação, permitindo a previsão do estado do bebê com base nas variáveis monitoradas. Para isso, utilizaremos a biblioteca Keras em conjunto com o TensorFlow.
