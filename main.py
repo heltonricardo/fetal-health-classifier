@@ -25,10 +25,12 @@ def load_model():
     """
     Loads a pre-trained model from an MLflow server.
 
-    This function connects to an MLflow server using the provided tracking URI, username,
-    and password.
-    It retrieves the latest version of the 'fetal_health' model registered on the server.
-    The function then loads the model using the specified run ID and returns the loaded model.
+    This function connects to an MLflow server using the provided tracking URI,
+    username, and password.
+    It retrieves the latest version of the 'fetal_health' model registered on
+    the server.
+    The function then loads the model using the specified run ID and returns
+    the loaded model.
 
     Returns:
         loaded_model: The loaded pre-trained model.
@@ -37,7 +39,8 @@ def load_model():
         None
     """
     print("reading model...")
-    MLFLOW_TRACKING_URI = "https://dagshub.com/renansantosmendes/mlops-ead.mlflow"
+    MLFLOW_TRACKING_URI = \
+        "https://dagshub.com/renansantosmendes/mlops-ead.mlflow"
     MLFLOW_TRACKING_USERNAME = "renansantosmendes"
     MLFLOW_TRACKING_PASSWORD = "b63baf8c662a23fa00deb74ba86600278769e5dd"
     os.environ["MLFLOW_TRACKING_USERNAME"] = MLFLOW_TRACKING_USERNAME
@@ -59,8 +62,8 @@ def load_model():
 @app.on_event(event_type="startup")
 def startup_event():
     """
-    A function that is called when the application starts up. It loads a model into the
-    global variable `loaded_model`.
+    A function that is called when the application starts up. It loads a model
+    into the global variable `loaded_model`.
 
     Parameters:
         None
@@ -78,8 +81,8 @@ def api_health():
     A function that represents the health endpoint of the API.
 
     Returns:
-        dict: A dictionary containing the status of the API, with the key "status" and
-        the value "healthy".
+        dict: A dictionary containing the status of the API, with the key
+        "status" and the value "healthy".
     """
     return {"status": "healthy"}
 
@@ -90,7 +93,8 @@ def predict(request: FetalHealthData):
     Predicts the fetal health based on the given request data.
 
     Args:
-        request (FetalHealthData): The request data containing the fetal health parameters.
+        request (FetalHealthData): The request data containing the fetal
+        health parameters.
 
     Returns:
         dict: A dictionary containing the prediction of the fetal health.

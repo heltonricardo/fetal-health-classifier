@@ -11,8 +11,8 @@ def sample_data():
     A fixture function that returns a sample dataset.
 
     Returns:
-        pandas.DataFrame: A DataFrame containing sample data with three columns: 'feature1',
-        'feature2', and 'fetal_health'.
+        pandas.DataFrame: A DataFrame containing sample data with three
+        columns: 'feature1', 'feature2', and 'fetal_health'.
     """
     data = pd.DataFrame(
         {
@@ -26,8 +26,8 @@ def sample_data():
 
 def test_read_data():
     """
-    This function tests the `read_data` function. It checks whether the returned data is not
-    empty for both features (X) and labels (y).
+    This function tests the `read_data` function. It checks whether the
+    returned data is not empty for both features (X) and labels (y).
 
     Parameters:
     None
@@ -43,8 +43,8 @@ def test_read_data():
 
 def test_create_model():
     """
-    Generate the function comment for the given function body in a markdown code block with
-    the correct language syntax.
+    Generate the function comment for the given function body in a markdown
+    code block with the correct language syntax.
     """
     X, _ = read_data()
     model = create_model(X)
@@ -56,12 +56,12 @@ def test_create_model():
 
 def test_train_model(sample_data):
     """
-    Generate a function comment for the given function body in a markdown code block with
-    the correct language syntax.
+    Generate a function comment for the given function body in a markdown code
+    block with the correct language syntax.
 
     Parameters:
-        sample_data (pandas.DataFrame): The input data containing features and target
-        variable.
+        sample_data (pandas.DataFrame): The input data containing features and
+        target variable.
 
     Returns:
         None
