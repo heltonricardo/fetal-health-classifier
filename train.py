@@ -15,8 +15,8 @@ def reset_seeds():
     """
     Reset the seeds for random number generators.
 
-    This function sets the seeds for the `os`, `tf.random`, `np.random`, and `random`
-    modules to ensure reproducibility in random number generations.
+    This function sets the seeds for the `os`, `tf.random`, `np.random`, and
+    `random` modules to ensure reproducibility in random number generations.
 
     Parameters:
         None
@@ -32,15 +32,17 @@ def reset_seeds():
 
 def read_data():
     """
-    Reads the data from a CSV file and returns the feature matrix X and target vector y.
+    Reads the data from a CSV file and returns the feature matrix X and target
+    vector y.
 
     Returns:
-        X (pandas.DataFrame): The feature matrix of shape (n_samples, n_features).
+        X (pandas.DataFrame): The feature matrix of shape (n_samp, n_feat).
         y (pandas.Series): The target vector of shape (n_samples,).
     """
     data = pd.read_csv(
-        "https://raw.githubusercontent.com/heltonricardo/fetal-health-classifier/main/fetal_health_reduced.csv"
-    )
+        "https://raw.githubusercontent.com/heltonricardo/"
+        "fetal-health-classifier/main/fetal_health_reduced.csv"
+                       )
     X = data.drop(["fetal_health"], axis=1)
     y = data["fetal_health"]
     return X, y
@@ -77,11 +79,12 @@ def process_data(X, y):
 
 def create_model(X):
     """
-    Creates a neural network model for classification based on the given input data.
+    Creates a neural network model for classification based on the given input
+    data.
 
     Parameters:
-        X (numpy.ndarray): The input data array. It should have a shape of (num_samples,
-        num_features).
+        X (numpy.ndarray): The input data array. It should have a shape of
+        (num_samples, num_features).
 
     Returns:
         tensorflow.keras.models.Sequential: The created neural network model.
@@ -94,7 +97,9 @@ def create_model(X):
     model.add(Dense(3, activation="softmax"))
 
     model.compile(
-        loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"]
+        loss="sparse_categorical_crossentropy",
+        optimizer="adam",
+        metrics=["accuracy"]
     )
     return model
 
@@ -104,14 +109,17 @@ def config_mlflow():
     Configures the MLflow settings for tracking experiments.
 
     Sets the MLFLOW_TRACKING_USERNAME and MLFLOW_TRACKING_PASSWORD environment
-    variables to provide authentication for accessing the MLflow tracking server.
+    variables to provide authentication for accessing the MLflow tracking
+    server.
 
-    Sets the MLflow tracking URI to 'https://dagshub.com/renansantosmendes/mlops-ead.mlflow'
+    Sets the MLflow tracking URI to
+    'https://dagshub.com/renansantosmendes/mlops-ead.mlflow'
     to specify the location where the experiment data will be logged.
 
-    Enables autologging of TensorFlow models by calling `mlflow.tensorflow.autolog()`.
-    This will automatically log the TensorFlow models, input examples, and model signatures
-    during training.
+    Enables autologging of TensorFlow models by calling
+    `mlflow.tensorflow.autolog()`.
+    This will automatically log the TensorFlow models, input examples, and
+    model signatures during training.
 
     Parameters:
         None
@@ -120,8 +128,11 @@ def config_mlflow():
         None
     """
     os.environ["MLFLOW_TRACKING_USERNAME"] = "renansantosmendes"
-    os.environ["MLFLOW_TRACKING_PASSWORD"] = "6d730ef4a90b1caf28fbb01e5748f0874fda6077"
-    mlflow.set_tracking_uri("https://dagshub.com/renansantosmendes/mlops-ead.mlflow")
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = \
+        "6d730ef4a90b1caf28fbb01e5748f0874fda6077"
+    mlflow.set_tracking_uri(
+        "https://dagshub.com/renansantosmendes/mlops-ead.mlflow"
+    )
 
     mlflow.tensorflow.autolog(
         log_models=True, log_input_examples=True, log_model_signatures=True
