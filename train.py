@@ -41,7 +41,7 @@ def read_data():
     """
     data = pd.read_csv(
         "https://raw.githubusercontent.com/heltonricardo/"
-        "fetal-health-classifier/main/fetal_health_reduced.csv"
+        "fetal-health-classifier/main/data/fetal_health_reduced.csv"
                        )
     X = data.drop(["fetal_health"], axis=1)
     y = data["fetal_health"]

@@ -1,8 +1,8 @@
 import os
 import mlflow
 import numpy as np
-from pydantic import BaseModel
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 
 class FetalHealthData(BaseModel):
