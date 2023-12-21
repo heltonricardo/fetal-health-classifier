@@ -86,6 +86,11 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Set Environment Variables
+        run: |
+          echo "MLFLOW_TRACKING_URI=${{ secrets.MLFLOW_TRACKING_URI }}" >> $GITHUB_ENV
+          echo "MLFLOW_TRACKING_MODEL=${{ secrets.MLFLOW_TRACKING_MODEL }}" >> $GITHUB_ENV
+
       - name: Train Model
         run: python src/train.py
 
