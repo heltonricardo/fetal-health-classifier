@@ -1,13 +1,12 @@
 import os
-import random
-
 import mlflow
+import random
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from keras.layers import Dense, InputLayer
-from keras.models import Sequential
 from sklearn import preprocessing
+from keras.models import Sequential
+from keras.layers import Dense, InputLayer
 from sklearn.model_selection import train_test_split
 
 

@@ -1,7 +1,6 @@
-import pandas as pd
 import pytest
+import pandas as pd
 from tensorflow.keras.models import Sequential
-
 from train import read_data, create_model, train_model
 
 
