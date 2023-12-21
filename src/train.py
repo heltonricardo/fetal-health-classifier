@@ -111,9 +111,8 @@ def config_mlflow():
     variables to provide authentication for accessing the MLflow tracking
     server.
 
-    Sets the MLflow tracking URI to
-    'https://dagshub.com/renansantosmendes/mlops-ead.mlflow'
-    to specify the location where the experiment data will be logged.
+    Sets the MLflow tracking URI to specify the location where the experiment
+    data will be logged.
 
     Enables autologging of TensorFlow models by calling
     `mlflow.tensorflow.autolog()`.
@@ -126,13 +125,8 @@ def config_mlflow():
     Returns:
         None
     """
-    os.environ["MLFLOW_TRACKING_USERNAME"] = "renansantosmendes"
-    os.environ["MLFLOW_TRACKING_PASSWORD"] = \
-        "6d730ef4a90b1caf28fbb01e5748f0874fda6077"
-    mlflow.set_tracking_uri(
-        "https://dagshub.com/renansantosmendes/mlops-ead.mlflow"
-    )
 
+    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
     mlflow.tensorflow.autolog(
         log_models=True, log_input_examples=True, log_model_signatures=True
     )
@@ -157,7 +151,7 @@ def train_model(model, X_train, y_train, is_train=True):
         model.fit(X_train, y_train, epochs=50, validation_split=0.2, verbose=3)
     if is_train:
         run_uri = f"runs:/{run.info.run_id}"
-        mlflow.register_model(run_uri, "fetal_health")
+        mlflow.register_model(run_uri, os.getenv("MLFLOW_TRACKING_MODEL"))
 
 
 if __name__ == "__main__":

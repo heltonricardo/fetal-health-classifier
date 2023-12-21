@@ -39,18 +39,16 @@ def load_model():
         None
     """
     print("reading model...")
-    MLFLOW_TRACKING_URI = \
-        "https://dagshub.com/renansantosmendes/mlops-ead.mlflow"
-    MLFLOW_TRACKING_USERNAME = "renansantosmendes"
-    MLFLOW_TRACKING_PASSWORD = "b63baf8c662a23fa00deb74ba86600278769e5dd"
-    os.environ["MLFLOW_TRACKING_USERNAME"] = MLFLOW_TRACKING_USERNAME
-    os.environ["MLFLOW_TRACKING_PASSWORD"] = MLFLOW_TRACKING_PASSWORD
+    MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
+    MLFLOW_TRACKING_USERNAME = os.getenv("MLFLOW_TRACKING_USERNAME")
+    MLFLOW_TRACKING_PASSWORD = os.getenv("MLFLOW_TRACKING_PASSWORD")
+    MLFLOW_TRACKING_MODEL = os.getenv("MLFLOW_TRACKING_MODEL")
     print("setting mlflow...")
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     print("creating client..")
     client = mlflow.MlflowClient(tracking_uri=MLFLOW_TRACKING_URI)
     print("getting registered model...")
-    registered_model = client.get_registered_model("fetal_health")
+    registered_model = client.get_registered_model(MLFLOW_TRACKING_MODEL)
     print("read model...")
     run_id = registered_model.latest_versions[-1].run_id
     logged_model = f"runs:/{run_id}/model"
