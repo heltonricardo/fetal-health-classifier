@@ -2,6 +2,8 @@ name: Train Pipeline
 
 on:
   push:
+    branches:
+      - main
   pull_request:
     branches:
       - layers
@@ -11,17 +13,19 @@ on:
   repository_dispatch:
     types:
       - webhook
+
 jobs:
   test_train:
     name: Test train
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
@@ -30,6 +34,9 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Set Environment Variables
+        run: echo "DAGSHUB_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" >> $GITHUB_ENV
+
       - name: Test files
         run: pytest src/test_train.py
 
@@ -37,12 +44,13 @@ jobs:
     name: Check Python code style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
@@ -59,12 +67,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test_train]
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
 
@@ -86,6 +95,5 @@ jobs:
   #       run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
   #     - name: Build the Docker image
   #       run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_IMAGE_NAME}}
-
   #     - name: Docker Push
   #       run: docker push ${{secrets.DOCKER_USER}}/${{secrets.DOCKER_IMAGE_NAME}}
