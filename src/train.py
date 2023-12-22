@@ -151,7 +151,7 @@ def train_model(model, X_train, y_train, is_train=True):
         model.fit(X_train, y_train, epochs=50, validation_split=0.2, verbose=3)
     if is_train:
         run_uri = f"runs:/{run.info.run_id}"
-        mlflow.register_model(run_uri, os.getenv("MLFLOW_TRACKING_MODEL"))
+        mlflow.register_model(run_uri, "fetal_health")
 
 
 if __name__ == "__main__":
