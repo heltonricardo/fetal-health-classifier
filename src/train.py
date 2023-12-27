@@ -126,6 +126,8 @@ def config_mlflow():
         None
     """
 
+    os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv("MLFLOW_TRACKING_USERNAME")
+    os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv("MLFLOW_TRACKING_PASSWORD")
     mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
     mlflow.tensorflow.autolog(
         log_models=True, log_input_examples=True, log_model_signatures=True
