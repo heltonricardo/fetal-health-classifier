@@ -2,6 +2,13 @@
 
 Repositório para o projeto de `detecção de sofrimento fetal` utilizando técnicas de **Inteligência Artificial e Machine Learning** com o auxílio de **Keras e TensorFlow**. O foco principal está na análise de dados provenientes de cardiotocografias para prever possíveis situações de risco durante o trabalho de parto.
 
+## 📑 Sumário
+
+- [Contextualização](#🌐-contextualização)
+- [Classes de classificação e dataset](#📊-classes-de-classificação-e-dataset)
+- [Abordagem na resolução do problema](#🛠️-abordagem-na-resolução-do-problema)
+- [Configuração de segredos](#🔐-configuração-de-segredos)
+
 ## 🌐 Contextualização
 
 O termo `sofrimento fetal` refere-se a situações críticas durante o trabalho de parto, nas quais o bebê está em risco de vida. A `cardiotocografia` é o exame central neste contexto, assemelhando-se a um eletrocardiograma, mas destinado a monitorar o batimento cardíaco do feto e diversas variáveis relacionadas às contrações uterinas da gestante.
@@ -24,7 +31,13 @@ Ao lidar com os dados, o especialista médico desempenha um papel crucial, ident
 
 ## 🔐 Configuração de segredos
 
-Para que a pipeline do projeto funcione corretamente, é necessário configurar os seguintes segredos no repositório do GitHub. Esses segredos são utilizados para diversas finalidades, como autenticação, controle de acesso e integração contínua. Aqui estão os segredos necessários, com pequenas descrições:
+Para que a pipeline do projeto funcione corretamente, é necessário configurar os seguintes segredos no repositório do GitHub (**Settings > Secrets and variables > Actions > Repository secrets**). Esses segredos são utilizados para diversas finalidades, como autenticação, controle de acesso e integração contínua.
+
+> Para obter os valores necessários para os segredos, é preciso criar contas em duas plataformas essenciais:
+>
+> [Docker Hub](https://hub.docker.com/) é uma plataforma para construção e compartilhamento de containers Docker. Registre-se para obter as credenciais necessárias.
+>
+> [Dagshub](https://dagshub.com/) é uma plataforma para gerenciamento de modelos de machine learning. Crie uma conta para obter as credenciais necessárias para rastreamento com o MLflow.
 
 | Nome                     | Descrição                                         |
 | ------------------------ | ------------------------------------------------- |
@@ -35,11 +48,5 @@ Para que a pipeline do projeto funcione corretamente, é necessário configurar 
 | MLFLOW_TRACKING_PASSWORD | Senha de autenticação para o rastreamento MLflow. |
 | MLFLOW_TRACKING_URI      | URI para o rastreamento do MLflow.                |
 | MLFLOW_TRACKING_USERNAME | Nome de usuário para autenticação MLflow.         |
-
-> Para obter os valores necessários para os segredos, é preciso criar contas em duas plataformas essenciais:
->
-> [Docker Hub](https://hub.docker.com/) é uma plataforma para construção e compartilhamento de containers Docker. Registre-se para obter as credenciais necessárias.
->
-> [Dagshub](https://dagshub.com/) é uma plataforma para gerenciamento de modelos de machine learning. Crie uma conta para obter as credenciais necessárias para rastreamento com o MLflow.
 
 Créditos: [Professor Renan Santos](https://github.com/renansantosmendes)
